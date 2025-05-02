@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Browser</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background: url();
+        }
+        #toolbar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        #url {
+            flex: 1;
+            padding: 8px;
+            font-size: 16px;
+        }
+        #iframe {
+            width: 200%;
+            height: 90vh;
+            border: none;
+        }
+    </style>
+  </head>
+  <body>
+
+    <div id="browser">
+        <div id="toolbar">
+            <input type="text" id="url" placeholder="Enter a URL or search term"/>
+            <button onclick="loadPage()">Go</button>
+        </div>
+        <iframe id="webview" src=""></iframe>
+    </div>
+
+    <script>
+
+        function loadPage() {
+            let input = document.getElementById('url').value.trim();
+            let url;
+            if (input.startsWith('http') || input.includes('.')) {
+                url = input.startWith('http') ? input : `https://${input}`;
+            } else {
+                url = `https://www.google.com/search?q=${encodeURIComponent(input)}`;
+            }
+            document.getElementById('webview').src = url;
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+  </body>
+</html>
